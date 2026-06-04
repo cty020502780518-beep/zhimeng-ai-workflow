@@ -14,7 +14,10 @@ WORKDIR /app
 
 # Set timezone
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    echo "Asia/Shanghai" > /etc/timezone
+    echo "Asia/Shanghai" > /etc/timezone && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends curl && \
+    rm -rf /var/lib/apt/lists/*
 
 # Copy built jar
 COPY --from=build /app/core-workflow-java/target/workflow-java.jar /app/workflow-java.jar
@@ -26,8 +29,8 @@ RUN mkdir -p /app/logs
 EXPOSE 7880
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
-  CMD wget --quiet --tries=1 --spider http://localhost:7880/actuator/health || exit 1
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=5 \
+  CMD curl -fsS http://localhost:7880/actuator/health/readiness || exit 1
 
 # Entrypoint
 ENTRYPOINT ["java", \

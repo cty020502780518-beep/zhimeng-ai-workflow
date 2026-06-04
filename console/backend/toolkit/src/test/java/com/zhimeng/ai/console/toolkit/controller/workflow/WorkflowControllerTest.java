@@ -82,7 +82,7 @@ class WorkflowControllerTest {
     private static final String VALID_PROMPT_ID = "valid-prompt-789";
     private static final Long VALID_WORKFLOW_ID = 1L;
     private static final Long VALID_SPACE_ID = 100L;
-    private static final String CORRECT_PASSWORD = "xfyun";
+    private static final String CORRECT_PASSWORD = "change-me";
     private static final String WRONG_PASSWORD = "wrong";
 
     @Mock
@@ -318,7 +318,7 @@ class WorkflowControllerTest {
      * @return a stream of invalid password strings
      */
     static Stream<String> invalidPasswords() {
-        return Stream.of("", "wrong", "XFYUN", "xfyun ", " xfyun", "12345");
+        return Stream.of("", "wrong", "CHANGE-ME", "change-me ", " change-me", "12345");
     }
 
     /**

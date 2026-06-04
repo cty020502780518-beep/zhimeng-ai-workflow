@@ -9,7 +9,7 @@ services:
     container_name: zhimeng-ai-mysql
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change_me}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?set MYSQL_ROOT_PASSWORD in .env}
       MYSQL_DATABASE: zhimeng-ai-console
     ports:
       - "3307:3306"
@@ -23,7 +23,7 @@ services:
       - zhimeng-ai-network
     restart: always
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$${MYSQL_ROOT_PASSWORD} || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -32,13 +32,19 @@ services:
   redis:
     image: docker.m.daocloud.io/library/redis:7
     container_name: zhimeng-ai-redis
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?set REDIS_PASSWORD in .env}
+    command:
+      - sh
+      - -c
+      - redis-server --appendonly yes --requirepass "$${REDIS_PASSWORD}"
     volumes:
       - redis_data:/data
     networks:
       - zhimeng-ai-network
     restart: always
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ["CMD-SHELL", "redis-cli -a $${REDIS_PASSWORD} ping | grep PONG"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -48,8 +54,8 @@ services:
     image: docker.m.daocloud.io/minio/minio:RELEASE.2025-07-23T15-54-02Z
     container_name: zhimeng-ai-minio
     environment:
-      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
-      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-change_me}
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:?set MINIO_ROOT_USER in .env}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?set MINIO_ROOT_PASSWORD in .env}
     ports:
       - "9000:9000"
       - "9001:9001"
@@ -103,16 +109,17 @@ services:
       MYSQL_PORT: 3306
       MYSQL_DB: zhimeng-ai-console
       MYSQL_USER: root
-      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change_me}
+      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD:?set MYSQL_ROOT_PASSWORD in .env}
       
       # Redis
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?set REDIS_PASSWORD in .env}
       
       # MinIO
       OSS_ENDPOINT: http://minio:9000
-      OSS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:-minioadmin}
-      OSS_ACCESS_KEY_SECRET: ${MINIO_ROOT_PASSWORD:-change_me}
+      OSS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:?set MINIO_ROOT_USER in .env}
+      OSS_ACCESS_KEY_SECRET: ${MINIO_ROOT_PASSWORD:?set MINIO_ROOT_PASSWORD in .env}
       OSS_REMOTE_ENDPOINT: http://localhost:9000
       OSS_BUCKET_CONSOLE: console
       
@@ -134,6 +141,12 @@ services:
     networks:
       - zhimeng-ai-network
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/actuator/health/readiness >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 90s
 
   # Core Workflow Java
   core-workflow-java:
@@ -147,19 +160,20 @@ services:
       MYSQL_PORT: 3306
       MYSQL_DB: zhimeng-ai-workflow
       MYSQL_USER: root
-      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change_me}
+      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD:?set MYSQL_ROOT_PASSWORD in .env}
       
       # Redis
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?set REDIS_PASSWORD in .env}
       
       # Integration with Console
       MODEL_SERVICE_URL: http://console-hub:8080
       
       # MinIO
       OSS_ENDPOINT: http://minio:9000
-      OSS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:-minioadmin}
-      OSS_ACCESS_KEY_SECRET: ${MINIO_ROOT_PASSWORD:-change_me}
+      OSS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:?set MINIO_ROOT_USER in .env}
+      OSS_ACCESS_KEY_SECRET: ${MINIO_ROOT_PASSWORD:?set MINIO_ROOT_PASSWORD in .env}
       OSS_REMOTE_ENDPOINT: http://localhost:9000
       
       SERVER_PORT: 7880
@@ -175,6 +189,12 @@ services:
     networks:
       - zhimeng-ai-network
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:7880/actuator/health/readiness >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 90s
 
 networks:
   zhimeng-ai-network:

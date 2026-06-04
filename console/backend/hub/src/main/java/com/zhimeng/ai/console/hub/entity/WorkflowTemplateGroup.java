@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @TableName("workflow_template_group")
-@Schema(name = "WorkflowTemplateGroup", description = "Astron workflow template group (general management control)")
+@Schema(name = "WorkflowTemplateGroup", description = "Zhimeng workflow template group (general management control)")
 public class WorkflowTemplateGroup {
 
     @TableId(type = IdType.AUTO)

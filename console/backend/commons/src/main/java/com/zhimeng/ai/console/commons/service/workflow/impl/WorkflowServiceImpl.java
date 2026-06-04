@@ -61,7 +61,7 @@ public class WorkflowServiceImpl implements WorkflowBotService {
                 .updateTime(LocalDateTime.now())
                 .build();
         userLangChainDataService.insertUserLangChainInfo(userLangChainInfo);
-        log.info("----- Astron workflow synchronization successful, original maasId: {}, flowId: {}, new assistant: {}", originId, flowId, currentBotId);
+        log.info("----- Zhimeng workflow synchronization successful, original maasId: {}, flowId: {}, new assistant: {}", originId, flowId, currentBotId);
         return Math.toIntExact(currentBotId);
     }
 }

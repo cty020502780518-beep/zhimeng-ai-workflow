@@ -36,7 +36,7 @@ public class ModelServiceClient {
         boolean mock = false;
         if (mock) {
             String mockResponse = """
-                    大家好，欢迎来到《沉默王二的编程人生》播客！今天我们要聊的是一个在编程世界里举足轻重的语言——Java。
+                    大家好，欢迎来到《示例技术播客》播客！今天我们要聊的是一个在编程世界里举足轻重的语言——Java。
                                     
                     Java，这个由Sun Microsystems在1995年推出的编程语言，可以说是改变了整个软件开发的格局。它的设计理念"一次编写，到处运行"让无数开发者为之倾倒。
                                     

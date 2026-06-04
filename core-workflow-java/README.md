@@ -187,11 +187,11 @@ public class StartNodeExecutor extends AbstractNodeExecutor {
    - `WorkflowStreamCallback`封装了工作流级别的回调处理
 
 2. **消息类型**：
-   - `onSparkflowStart()`：工作流开始
+   - `onWorkflowStart()`：工作流开始
    - `onNodeStart()`：节点开始执行
    - `onNodeProcess()`：节点处理过程
    - `onNodeEnd()`：节点执行结束
-   - `onSparkflowEnd()`：工作流结束
+   - `onWorkflowEnd()`：工作流结束
    - `onNodeInterrupt()`：节点中断
 
 3. **消息推送机制**：
@@ -257,7 +257,7 @@ public class StartNodeExecutor extends AbstractNodeExecutor {
 
 ## 调试技巧
 
-### 1. 查看 Python 版本实现
+### 1. 查看 Java 工作流执行链路
 
 ```bash
 # 查看 Python 版本的日志

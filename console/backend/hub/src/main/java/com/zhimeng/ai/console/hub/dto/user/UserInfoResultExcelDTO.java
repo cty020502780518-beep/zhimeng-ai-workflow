@@ -11,18 +11,18 @@ import lombok.Data;
 @Data
 @OnceAbsoluteMerge(firstRowIndex = 0, firstColumnIndex = 0, lastRowIndex = 0, lastColumnIndex = 9)
 public class UserInfoResultExcelDTO {
-    @ExcelProperty(value = {"Please ensure the mobile number is registered on the Astron platform, the parsing result only displays registered users. Duplicate accounts will be automatically deduplicated.", "Mobile Number"}, index = 0)
+    @ExcelProperty(value = {"Please ensure the mobile number is registered on the Zhimeng platform, the parsing result only displays registered users. Duplicate accounts will be automatically deduplicated.", "Mobile Number"}, index = 0)
     @ColumnWidth(15)
     private String mobile;
 
-    @ExcelProperty(value = {"Please ensure the username is registered on the Astron platform, the parsing result only displays registered users. Duplicate accounts will be automatically deduplicated.", "Username"}, index = 1)
+    @ExcelProperty(value = {"Please ensure the username is registered on the Zhimeng platform, the parsing result only displays registered users. Duplicate accounts will be automatically deduplicated.", "Username"}, index = 1)
     @ColumnWidth(15)
     private String username;
 
     /**
      * @see com.zhimeng.ai.console.hub.enums.UserInfoResultEnum
      */
-    @ExcelProperty(value = {"Please ensure the mobile number is registered on the Astron platform, the parsing result only displays registered users. Duplicate accounts will be automatically deduplicated.", "Parsing Result"}, index = 2)
+    @ExcelProperty(value = {"Please ensure the mobile number is registered on the Zhimeng platform, the parsing result only displays registered users. Duplicate accounts will be automatically deduplicated.", "Parsing Result"}, index = 2)
     @ColumnWidth(13)
     private String result;
 }

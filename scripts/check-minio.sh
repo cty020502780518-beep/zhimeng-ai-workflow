@@ -10,7 +10,7 @@ LOG_DIR="${RUNTIME_DIR}/logs"
 
 mkdir -p "${PID_DIR}" "${LOG_DIR}"
 
-MINIO_DIR="${MINIO_DIR:-/Users/cty020502780518-beep/Downloads/minio1}"
+MINIO_DIR="${MINIO_DIR:-${PROJECT_ROOT}/.runtime/minio}"
 MINIO_API_PORT="${MINIO_API_PORT:-9000}"
 MINIO_CONSOLE_PORT="${MINIO_CONSOLE_PORT:-9001}"
 MINIO_CMD="${MINIO_CMD:-./minio server data/ --console-address :${MINIO_CONSOLE_PORT}}"

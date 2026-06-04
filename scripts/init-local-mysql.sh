@@ -237,14 +237,14 @@ fi
 #UPDATE workflow
 #SET workflow = REPLACE(
 #  workflow,
-#  '680ab54f',
-#  'f740451b'
+#  'DEMO_TENANT_ID',
+#  'DEMO_APP_ID'
 #)
-#WHERE workflow LIKE '%680ab54f%';
+#WHERE workflow LIKE '%DEMO_TENANT_ID%';
 #EOF
 #
 #if [ $? -eq 0 ]; then
-#    echo -e "${GREEN}✓ Workflow AI_APP_ID 已更新为 f740451b${NC}"
+#    echo -e "${GREEN}✓ Workflow AI_APP_ID 已更新为 DEMO_APP_ID${NC}"
 #else
 #    echo -e "${YELLOW}⚠ Workflow AI_APP_ID 更新失败（可能是数据不存在）${NC}"
 #fi

@@ -1,5 +1,5 @@
 server:
-  port: 7880
+  port: ${SERVER_PORT:7880}
   servlet:
     context-path: /
 
@@ -53,10 +53,10 @@ spring:
   ai:
     # 引用openai时，要求必须设置api-key；我们实际上从流程编排中获取对应的apiKey
     openai:
-      api-key: "test"
+      api-key: ${OPENAI_API_KEY:}
       audio:
         speech:
-          api-key: "test"
+          api-key: ${OPENAI_API_KEY:}
 
   # JSON 配置
   jackson:
@@ -137,8 +137,8 @@ workflow:
 s3:
   endpoint: ${OSS_ENDPOINT:http://localhost:9000}
   remoteEndpoint: ${OSS_REMOTE_ENDPOINT:http://localhost:9000}
-  accessKey: ${OSS_ACCESS_KEY_ID:minioadmin}
-  secretKey: ${OSS_ACCESS_KEY_SECRET:minioadmin}
+  accessKey: ${OSS_ACCESS_KEY_ID:}
+  secretKey: ${OSS_ACCESS_KEY_SECRET:}
   bucket: ${OSS_BUCKET_CONSOLE:aitools}
   presignExpirySeconds: ${OSS_PRESIGN_EXPIRY_SECONDS_CONSOLE:600}
   enablePublicRead: true
@@ -149,13 +149,13 @@ tts:
 
 spark:
   source: spark
-  app-id: ${SPARK_APP_ID:f740451b}
+  app-id: ${SPARK_APP_ID:}
   api-key: ${SPARK_API_KEY:}
   api-secret: ${SPARK_API_SECRET:}
   tts-url: ${SPARK_TTS_URL:wss://cbm01.cn-huabei-1.xf-yun.com/v1/private/mcd9m97e6}
 
 qwen:
   source: qwen
-  api-key: ${QWEN_API_KEY:sk-yours}
+  api-key: ${QWEN_API_KEY:}
   model: ${QWEN_MODEL:qwen3-tts-flash}
   tts-url: ${QWEN_TTS_URL:https://dashscope.aliyuncs.com/api/v1}

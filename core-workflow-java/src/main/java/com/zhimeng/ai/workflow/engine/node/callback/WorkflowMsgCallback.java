@@ -66,7 +66,7 @@ public class WorkflowMsgCallback implements StreamCallback {
      * Handle workflow start event
      */
     public void onWorkflowStart() {
-        chatCallBacks.onSparkflowStart();
+        chatCallBacks.onWorkflowStart();
     }
 
     /**
@@ -75,7 +75,7 @@ public class WorkflowMsgCallback implements StreamCallback {
      * @param message Final node run result containing execution summary
      */
     public void onWorkflowEnd(NodeRunResult message) {
-        chatCallBacks.onSparkflowEnd(message);
+        chatCallBacks.onWorkflowEnd(message);
     }
 
     /**

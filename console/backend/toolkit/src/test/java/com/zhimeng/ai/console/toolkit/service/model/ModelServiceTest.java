@@ -460,7 +460,7 @@ class ModelServiceTest {
         pri.setCategory("MODEL_SECRET_KEY");
         pri.setCode("private_key");
         pri.setIsValid(1);
-        pri.setValue("-----BEGIN PRIVATE KEY-----\\nxxx\\n-----END PRIVATE KEY-----");
+        pri.setValue("REDACTED_TEST_PRIVATE_KEY");
         when(configInfoMapper.selectOne(any(LambdaQueryWrapper.class))).thenReturn(pri);
 
         // 2) mock static RSAUtil: loadPrivateKey + decrypt

@@ -2,12 +2,18 @@
 
 企业级 AI Agent 可视化工作流编排平台，支持拖拽式编排 LLM 节点、工具节点与逻辑控制流，提供从工作流设计、调试到发布的完整生命周期管理。
 
+## 项目说明
+
+本仓库为学习实践、二次开发与面试复盘用途的源码展示版本，已移除真实密钥并对公开仓库中的说明文档做了命名与技术表述校准。仓库不声明所有代码均为从零自研；Console、后台管理、工程脚手架与部分通用工具代码可能来源于开源项目或工程模板的学习与改造，原始作者信息与许可证声明应继续保留，详见 `NOTICE.md`。
+
+代码阅读重点是可视化工作流编排、Java 工作流执行引擎、SSE 流式回调、多模型调用封装、插件节点执行与 Docker Compose 本地部署。个人复盘/答辩时建议只围绕自己能够解释清楚的核心链路展开，不把模板代码、通用后台能力或第三方基础设施描述为完全原创实现。
+
 ## 技术栈
 
 | 层级 | 技术 |
 |------|------|
 | 后端框架 | Java 21 / Spring Boot 3.5 / Spring AI 1.1 |
-| 工作流引擎 | LangGraph4j / CompiledGraph |
+| 工作流引擎 | 自定义 WorkflowDSL / DAG 调度 / NodeExecutor |
 | 前端 | React 18 / TypeScript 5.9 / Vite 5.4 / Ant Design 5 / ReactFlow |
 | 数据库 | MySQL 8.4 / PostgreSQL / Redis 7 |
 | 对象存储 | MinIO |
@@ -83,7 +89,7 @@ npm run dev
 ## 核心功能
 
 - **可视化工作流编排**：基于 ReactFlow 的拖拽式节点编排，支持 LLM 节点、工具节点、条件分支
-- **Java 工作流执行引擎**：基于 Spring Boot + LangGraph4j 实现节点编排、执行调度与状态推进
+- **Java 工作流执行引擎**：基于 Spring Boot + 自定义 WorkflowDSL 实现节点编排、执行调度与状态推进
 - **多模型统一调用**：通过 Spring AI 统一抽象层接入 DeepSeek、OpenAI 等模型
 - **SSE 实时流式推送**：工作流执行进度、LLM 流式输出、节点状态变更毫秒级同步
 - **插件生态**：支持 MCP 协议、工具注册系统、语音合成插件
@@ -92,7 +98,7 @@ npm run dev
 
 ### 工作流执行引擎
 
-基于 LangGraph4j 的 CompiledGraph，通过 `NodeExecutor` 接口实现不同类型节点的统一调度，边驱动的顺序/并行执行链路完成从输入到 LLM 节点再到输出的流程推进。
+基于自定义 `WorkflowDSL`、`WorkflowEngine` 与 `NodeExecutor` 多态执行器实现轻量级 DAG 工作流执行引擎。系统参考图式编排思想，通过边驱动的顺序/并行执行链路完成从输入节点到 LLM、工具插件再到输出节点的流程推进。
 
 ### 多模型统一网关
 
@@ -143,4 +149,4 @@ Java 1233 · TypeScript/React 548 · 总计约 1800 个源文件（本仓库主�
 
 ## License
 
-MIT
+See `LICENSE` and `NOTICE.md`. Third-party/open-source/template components retain their original license and attribution requirements.

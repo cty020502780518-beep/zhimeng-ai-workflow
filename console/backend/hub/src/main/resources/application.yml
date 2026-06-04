@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${SERVER_PORT:8080}
   servlet:
     context-path: /
   # Tomcat connector configuration for SSE long connections
@@ -36,7 +36,7 @@ spring:
       # Connection test query
       connection-test-query: SELECT 1
       # Pool name
-      pool-name: AstronHikariCP
+      pool-name: ZhimengHikariCP
       # Auto commit
       auto-commit: true
       # Leak detection threshold (ms)
@@ -103,24 +103,24 @@ mybatis-plus:
 s3:
   endpoint: ${OSS_ENDPOINT:http://minio:9000}
   remoteEndpoint: ${OSS_REMOTE_ENDPOINT:http://your-host-domain:9000}
-  accessKey: ${OSS_ACCESS_KEY_ID:zhimeng-uploader}
-  secretKey: ${OSS_ACCESS_KEY_SECRET:zhimeng-uploader-secret}
+  accessKey: ${OSS_ACCESS_KEY_ID:}
+  secretKey: ${OSS_ACCESS_KEY_SECRET:}
   bucket: ${OSS_BUCKET_CONSOLE:zhimeng-agent}
   presignExpirySeconds: ${OSS_PRESIGN_EXPIRY_SECONDS_CONSOLE:600}
   enablePublicRead: true
 
 # Spark LLM configuration
 spark:
-  app-id: ${SPARK_APP_ID:xxx}
-  api-key: ${SPARK_API_KEY:xxx}
-  api-secret: ${SPARK_API_SECRET:xxx}
+  app-id: ${SPARK_APP_ID:}
+  api-key: ${SPARK_API_KEY:}
+  api-secret: ${SPARK_API_SECRET:}
   api:
     password: ${SPARK_API_PASSWORD:}
-  rtasr-key: ${SPARK_RTASR_KEY:xxx}
-  rtasr-appId: ${SPARK_RTASR_APPID:xxx}
-  image-appId: ${SPARK_IMAGE_APP_ID:xxx}
-  image-apiKey: ${SPARK_IMAGE_API_KEY:xxx}
-  image-apiSecret: ${SPARK_IMAGE_API_SECRET:xxx}
+  rtasr-key: ${SPARK_RTASR_KEY:}
+  rtasr-appId: ${SPARK_RTASR_APPID:}
+  image-appId: ${SPARK_IMAGE_APP_ID:}
+  image-apiKey: ${SPARK_IMAGE_API_KEY:}
+  image-apiSecret: ${SPARK_IMAGE_API_SECRET:}
 
 # Workflow configuration
 workflow:
@@ -148,18 +148,18 @@ workflow:
 
 
 maas:
-  appId: ${MAAS_APP_ID:your-maas-app-id}
-  apiKey: ${MAAS_API_KEY:your-maas-api-key}
-  apiSecret: ${MAAS_API_SECRET:your-maas-api-secret}
+  appId: ${MAAS_APP_ID:}
+  apiKey: ${MAAS_API_KEY:}
+  apiSecret: ${MAAS_API_SECRET:}
   workflowVersion: ${MAAS_WORKFLOW_VERSION:http://127.0.0.1:8080/workflow/version}
   synchronizeWorkFlow: ${MAAS_SYNCHRONIZE_WORK_FLOW:http://127.0.0.1:8080/workflow}
   publish: ${MAAS_PUBLISH:http://127.0.0.1:8080/workflow/publish}
   cloneWorkFlow: ${MAAS_CLONE_WORK_FLOW:http://127.0.0.1:8080/workflow/internal-clone}
   getInputs: ${MAAS_GET_INPUTS:http://127.0.0.1:8080/workflow/get-inputs-info}
   canPublishUrl: ${MAAS_CAN_PUBLISH_URL:http://127.0.0.1:8080/workflow/can-publish}
-  consumerId: ${MAAS_CONSUMER_ID:your-maas-consumer-id}
-  consumerSecret: ${MAAS_CONSUMER_SECRET:your-maas-consumer-secret}
-  consumerKey: ${MAAS_CONSUMER_KEY:your-maas-consumer-key}
+  consumerId: ${MAAS_CONSUMER_ID:}
+  consumerSecret: ${MAAS_CONSUMER_SECRET:}
+  consumerKey: ${MAAS_CONSUMER_KEY:}
   publishApi: ${MAAS_PUBLISH_API:http://localhost:7880/workflow/v1/publish}
   authApi: ${MAAS_AUTH_API:http://localhost:7880/workflow/v1/auth}
   mcpHost: ${MAAS_MCP_HOST:https://xingchen-api.xf-yun.com/mcp/xingchen/flow/%s/sse}
@@ -193,14 +193,38 @@ space:
 wechat:
   thirdparty:
     # Third-party platform AppID
-    component-appid: ${WECHAT_COMPONENT_APPID:your_component_appid}
+    component-appid: ${WECHAT_COMPONENT_APPID:}
     # Third-party platform AppSecret
-    component-secret: ${WECHAT_COMPONENT_SECRET:your_component_secret}
+    component-secret: ${WECHAT_COMPONENT_SECRET:}
     # Message verification token
-    token: ${WECHAT_TOKEN:your_token}
+    token: ${WECHAT_TOKEN:}
     # Message encryption/decryption key
-    encoding-aes-key: ${WECHAT_ENCODING_AES_KEY:your_encoding_aes_key}
+    encoding-aes-key: ${WECHAT_ENCODING_AES_KEY:}
 
 tenant:
   create-app: ${TENANT_CREATE_APP:http://localhost:5052/v2/app}
   get-app-detail: ${TENANT_GET_APP_DETAIL:http://localhost:5052/v2/app/details}
+
+
+# Actuator health endpoints for container readiness/liveness checks.
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+      base-path: /actuator
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: ${MANAGEMENT_HEALTH_SHOW_DETAILS:never}
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+
+info:
+  app:
+    name: zhimeng-ai-console-hub
+    version: ${APP_VERSION:0.0.1-SNAPSHOT}

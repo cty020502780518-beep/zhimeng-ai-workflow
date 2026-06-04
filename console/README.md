@@ -1,6 +1,8 @@
-# Astron Console Module
+# Zhimeng Console Module
 
-The Astron Console module is a comprehensive web application that provides a user interface and backend services for managing AI agents, chatbots, and related functionalities. This module consists of both frontend and backend components built with modern technologies.
+The Zhimeng Console module is a web application that provides a user interface and backend services for managing AI agents, chatbots, workflows, and related functionalities. This module consists of both frontend and backend components built with modern technologies.
+
+> Note: this public repository is a learning/secondary-development version. Some console scaffolding, comments, and generic admin capabilities may originate from upstream open-source projects or templates. Keep upstream author/license information and see the root `NOTICE.md`.
 
 ## Architecture Overview
 
@@ -165,4 +167,4 @@ npm run dev
 - **Frontend Configuration**: Environment-specific files in `frontend/`
 - **Docker Configuration**: Docker setup in `backend/docker/`
 
-This console module serves as the central interface for the Astron AI agent platform, providing comprehensive tools for agent creation, management, and interaction.
+This console module serves as the central interface for the Zhimeng AI workflow platform, providing tools for agent creation, workflow management, and interaction. See the root `NOTICE.md` for attribution and secondary-development boundaries.

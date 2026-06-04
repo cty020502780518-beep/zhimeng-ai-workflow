@@ -7,7 +7,7 @@ import java.util.List;
  * @author yingpeng
  */
 public enum ChatFileLimitEnum {
-    AGENT(16, "Astron Application Platform", 100, 200, "upload_agent_count_", 104857600L, 1, null,
+    AGENT(16, "Zhimeng Application Platform", 100, 200, "upload_agent_count_", 104857600L, 1, null,
             Arrays.asList("pdf", "jpg", "jpeg", "png", "bmp", "webp", "doc", "docx", "ppt", "pptx", "xls", "xlsx", "csv", "txt",
                     "wav", "mp3", "flac", "m4a", "aac", "ogg", "wma", "midi"));
 

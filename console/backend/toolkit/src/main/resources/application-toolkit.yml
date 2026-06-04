@@ -12,8 +12,8 @@ api:
     aiuiTenantKey: xxxxxxxxxxxxxxxx
     aiuiTenantSecret: xxxxxxxxxxxxxxxx
     appUrl: ${APP_URL:http://127.0.0.1:5052/v2/app}
-    apiKey: ${APP_APIKEY:apikey}
-    apiSecret: ${APP_API_SECRET:apiSecret}
+    apiKey: ${APP_APIKEY:}
+    apiSecret: ${APP_API_SECRET:}
     defaultAddRepo: sparkbot_repo_01
     knowledgeUrl: ${KNOWLEDGE_URL:http://127.0.0.1:30007/knowledge}
     mcpToolServer: http://127.0.0.1:port/api/v1
@@ -57,7 +57,7 @@ biz:
 xfyun:
   api:
     auth:
-      secret: ${API_AUTH_SECRET:api-auth-secret}
+      secret: ${API_AUTH_SECRET:}
 
 # MCP server configuration
 mcp-server:
@@ -86,6 +86,6 @@ task:
 
 # Common app-level authentication configuration
 common:
-  appid: ${COMMON_APPID:appid}
-  apiKey: ${COMMON_APIKEY:apiKey}
-  apiSecret: ${COMMON_API_SECRET:apiSecret}
+  appid: ${COMMON_APPID:}
+  apiKey: ${COMMON_APIKEY:}
+  apiSecret: ${COMMON_API_SECRET:}

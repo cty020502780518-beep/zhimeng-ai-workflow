@@ -15,8 +15,8 @@ spring:
 s3:
   endpoint: ${OSS_ENDPOINT:http://localhost:9000}
   remoteEndpoint: ${OSS_REMOTE_ENDPOINT:http://localhost:9000}
-  accessKey: ${OSS_ACCESS_KEY_ID:minioadmin}
-  secretKey: ${OSS_ACCESS_KEY_SECRET:minioadmin}
+  accessKey: ${OSS_ACCESS_KEY_ID:}
+  secretKey: ${OSS_ACCESS_KEY_SECRET:}
   bucket: ${OSS_BUCKET_CONSOLE:console}
 
 # LLM 配置
@@ -41,11 +41,11 @@ api:
 
 # Common 通用配置（用于 Workflow 节点的默认 AK/SK）
 common:
-  appid: ${SPARK_APP_ID:f740451b}
+  appid: ${SPARK_APP_ID:}
   apiKey: ${SPARK_API_KEY:}
   apiSecret: ${SPARK_API_SECRET:}
   apiPassword: ${SPARK_API_PASSWORD:}
-  imgAppid: ${SPARK_IMAGE_APP_ID:f740451b}
+  imgAppid: ${SPARK_IMAGE_APP_ID:}
   imgApiKey: ${SPARK_IMAGE_API_KEY:}
   imgApiSecret: ${SPARK_IMAGE_API_SECRET:}
 
@@ -64,6 +64,6 @@ maas:
   workflowConfig: http://localhost:8080/workflow/get-flow-advanced-config
   workflowVersion: http://localhost:8080/workflow/version
   publish: http://localhost:8080/workflow/publish
-  consumerId: ${MAAS_CONSUMER_ID:680ab54f}
+  consumerId: ${MAAS_CONSUMER_ID:}
   consumerKey: ${MAAS_CONSUMER_KEY:}
   consumerSecret: ${MAAS_CONSUMER_SECRET:}

@@ -67,7 +67,7 @@ public class ChatCallBacks {
      * <p>
      * Creates and queues a workflow start response, then handles event stream interruption.
      */
-    public void onSparkflowStart() {
+    public void onWorkflowStart() {
         LLMGenerate resp = LLMGenerate.workflowStart(this.sid);
         this.putFrameIntoQueue("WorkflowStart", resp, null);
     }
@@ -79,7 +79,7 @@ public class ChatCallBacks {
      *
      * @param message Final node run result containing execution summary
      */
-    public void onSparkflowEnd(NodeRunResult message) {
+    public void onWorkflowEnd(NodeRunResult message) {
         int code = ErrorCode.Success.getCode();
         String msg = ErrorCode.Success.getMsg();
 

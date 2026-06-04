@@ -58,7 +58,7 @@ public class BotMaasServiceImpl implements BotMaasService {
         Long maasId = maasDuplicate.getMaasId();
         UserLangChainInfo userLangChainInfo = userLangChainDataService.selectByMaasId(maasId);
         if (Objects.isNull(userLangChainInfo)) {
-            log.info("----- Xinghuo did not find Astron workflow: {}", JSONObject.toJSONString(userLangChainInfo));
+            log.info("----- Xinghuo did not find Zhimeng workflow: {}", JSONObject.toJSONString(userLangChainInfo));
             throw new BusinessException(ResponseEnum.BOT_NOT_EXIST);
         }
         redissonClient.getBucket(MaasUtil.generatePrefix(uid, Math.toIntExact(userLangChainInfo.getId()))).set(userLangChainInfo.getId().toString(), Duration.ofSeconds(60));
@@ -80,7 +80,7 @@ public class BotMaasServiceImpl implements BotMaasService {
 
     @Override
     public Integer maasCopySynchronize(CloneSynchronize synchronize) {
-        log.info("------ Astron workflow copy synchronization: {}", JSONObject.toJSONString(synchronize));
+        log.info("------ Zhimeng workflow copy synchronization: {}", JSONObject.toJSONString(synchronize));
         String uid = synchronize.getUid();
         Long originId = synchronize.getOriginId();
         Long maasId = synchronize.getCurrentId();
@@ -88,7 +88,7 @@ public class BotMaasServiceImpl implements BotMaasService {
         Long spaceId = synchronize.getSpaceId();
         UserLangChainInfo userLangChainInfo = userLangChainDataService.selectByMaasId(originId);
         if (Objects.isNull(userLangChainInfo)) {
-            log.info("----- Xinghuo did not find Astron workflow: {}", JSONObject.toJSONString(synchronize));
+            log.info("----- Xinghuo did not find Zhimeng workflow: {}", JSONObject.toJSONString(synchronize));
             throw new BusinessException(ResponseEnum.BOT_NOT_EXIST);
         }
         Integer botId = userLangChainInfo.getBotId();
@@ -109,7 +109,7 @@ public class BotMaasServiceImpl implements BotMaasService {
                 .updateTime(LocalDateTime.now())
                 .build();
         userLangChainDataService.insertUserLangChainInfo(userLangChainInfoNew);
-        log.info("----- Astron workflow synchronization successful, original maasId: {}, flowId: {}, new assistant: {}", originId, flowId, currentBotId);
+        log.info("----- Zhimeng workflow synchronization successful, original maasId: {}, flowId: {}, new assistant: {}", originId, flowId, currentBotId);
         return base.getId();
     }
 

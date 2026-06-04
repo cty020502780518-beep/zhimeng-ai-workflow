@@ -32,6 +32,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -71,6 +72,9 @@ public class WorkflowController {
     private final WorkflowService workflowService;
     private final TalkAgentService talkAgentService;
     private final WorkflowExportService workflowExportService;
+
+    @Value("${workflow.internal-clone.password:change-me}")
+    private String internalClonePassword = "change-me";
 
     // ---------------------- Basic Information ----------------------
 
@@ -177,7 +181,7 @@ public class WorkflowController {
     public Object cloneV2(
             @RequestBody CloneFlowReq req,
             HttpServletRequest request) {
-        if (!"xfyun".equals(req.getPassword())) {
+        if (!StringUtils.equals(internalClonePassword, req.getPassword())) {
             return ApiResult.error(ResponseEnum.INCORRECT_PASSWORD);
         }
         return workflowService.cloneForXfYun(req.getMaasId(), SpaceInfoUtil.getSpaceId(), req.getFlowType(), req.getBotId(), req.getFlowConfig(), request);

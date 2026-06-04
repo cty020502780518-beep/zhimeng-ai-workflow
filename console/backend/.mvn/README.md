@@ -48,7 +48,7 @@
 ## 命令行验证
 
 ```bash
-cd /Users/cty020502780518-beep/Documents/GitHub/PaiAgent/console/backend
+cd <project-root>/console/backend
 
 # 清理并重新构建
 mvn clean install -DskipTests

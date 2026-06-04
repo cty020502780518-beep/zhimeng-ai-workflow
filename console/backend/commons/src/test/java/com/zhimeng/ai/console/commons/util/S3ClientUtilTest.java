@@ -25,8 +25,8 @@ import org.springframework.test.util.ReflectionTestUtils;
  *
  * Test configuration: - MinIO connection details configurable via environment variables Environment
  * variables: - MINIO_TEST_ENDPOINT: MinIO server endpoint (default: http://localhost:9000) -
- * MINIO_TEST_ACCESS_KEY: Access key for authentication (default: minioadmin) -
- * MINIO_TEST_SECRET_KEY: Secret key for authentication (default: minioadmin) - MINIO_TEST_BUCKET:
+ * MINIO_TEST_ACCESS_KEY: Access key for authentication (default: test-access-key/test-secret-key) -
+ * MINIO_TEST_SECRET_KEY: Secret key for authentication (default: test-access-key/test-secret-key) - MINIO_TEST_BUCKET:
  * Bucket name for testing (default: zhimeng-project) - MINIO_INVALID_ACCESS_KEY: Invalid access key
  * for negative testing (default: invalid-user) - MINIO_INVALID_SECRET_KEY: Invalid secret key for
  * negative testing (default: invalid-secret)
@@ -42,8 +42,8 @@ class S3ClientUtilTest {
     // TEST_REMOTE_ENDPOINT is used for URL generation (external access)
     private static final String TEST_ENDPOINT = System.getenv().getOrDefault("MINIO_TEST_ENDPOINT", "http://localhost:9000");
     private static final String TEST_REMOTE_ENDPOINT = System.getenv().getOrDefault("MINIO_TEST_REMOTE_ENDPOINT", TEST_ENDPOINT);
-    private static final String TEST_ACCESS_KEY = System.getenv().getOrDefault("MINIO_TEST_ACCESS_KEY", "minioadmin");
-    private static final String TEST_SECRET_KEY = System.getenv().getOrDefault("MINIO_TEST_SECRET_KEY", "minioadmin");
+    private static final String TEST_ACCESS_KEY = System.getenv().getOrDefault("MINIO_TEST_ACCESS_KEY", "test-access-key");
+    private static final String TEST_SECRET_KEY = System.getenv().getOrDefault("MINIO_TEST_SECRET_KEY", "test-secret-key");
     private static final String TEST_BUCKET = System.getenv().getOrDefault("MINIO_TEST_BUCKET", "zhimeng-project");
 
     // Configuration for testing invalid credentials
