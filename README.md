@@ -172,9 +172,11 @@ npm run dev
 
 ## 面试官源码阅读导航
 
-> 如果您正在评估候选人此项目的技术深度，以下路径可按优先级阅读。
+> 如果您正在评估候选人此项目的技术深度，以下路径可按优先级阅读。每级标注了预估阅读时间与涉及的核心技术概念。
 
-### 第一优先：工作流执行引擎
+### 第一优先：工作流执行引擎 （预估 40-60 分钟）
+
+核心技术：DAG 调度 · NodeExecutor 多态 · WorkflowDSL · 拓扑排序 · 并行执行
 
 | 文件 | 关注点 |
 |------|--------|
@@ -185,7 +187,9 @@ npm run dev
 | `core-workflow-java/src/main/java/com/zhimeng/ai/workflow/engine/domain/WorkflowDSL.java` | 工作流 DSL 定义 |
 | `core-workflow-java/src/main/java/com/zhimeng/ai/workflow/engine/constants/NodeTypeEnum.java` | 节点类型枚举（LLM/Plugin/条件分支等） |
 
-### 第二优先：SSE 流式推送与多模型调用
+### 第二优先：SSE 流式推送与多模型调用 （预估 25-35 分钟）
+
+核心技术：Spring SseEmitter · Spring AI · Flux · LLM 流式回调
 
 | 文件 | 关注点 |
 |------|--------|
@@ -194,7 +198,9 @@ npm run dev
 | `console/backend/hub/src/main/java/com/zhimeng/ai/console/hub/client/LlmApiClient.java` | 多模型统一调度（OpenAI兼容） |
 | `console/backend/hub/src/main/java/com/zhimeng/ai/console/hub/service/chat/impl/BotChatServiceImpl.java` | Bot智能体聊天服务 |
 
-### 第三优先：前端与部署
+### 第三优先：前端与部署 （预估 15-20 分钟）
+
+核心技术：ReactFlow · Ant Design · Docker Compose · 健康检查
 
 | 文件 | 关注点 |
 |------|--------|
@@ -204,6 +210,8 @@ npm run dev
 ### 代码规模
 
 Java 1233 · TypeScript/React 548 · 总计约 1800 个源文件（本仓库主要包含 Console 前后端与 Java Workflow Engine；外部 Python/FastAPI 插件服务未纳入本次 GitHub 展示）
+
+**总预估阅读时间：约 80-115 分钟**（聚焦核心链路，不含模板代码与通用后台模块）
 
 ---
 
