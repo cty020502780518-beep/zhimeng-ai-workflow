@@ -16,17 +16,68 @@
 
 ## 系统架构
 
+```mermaid
+graph TD
+    A[Console Frontend<br/>React + TypeScript + ReactFlow<br/>Port 3000] -->|HTTP/SSE| B[Console Hub<br/>Spring Boot REST + SSE + Auth<br/>Port 8080]
+    B -->|Internal API| C[Core Workflow Engine<br/>Java / Spring Boot<br/>Port 7880]
+    B --> D[(MySQL 8.4<br/>Console DB)]
+    C --> D
+    C --> E[(PostgreSQL<br/>Optional)]
+    B --> F[(Redis 7<br/>Session / Cache)]
+    C --> F
+    B --> G[(MinIO<br/>File Storage)]
+    C --> H[External Services<br/>Link / AITools / RPA]
 ```
-Console Frontend (React + TypeScript + ReactFlow)   Port 3000
-        |
-Console Hub (Spring Boot REST + SSE + Auth)          Port 8080
-       / \
-      /   \
-Core Workflow Engine (Java)    External Tool/Plugin Services
-Port 7880                      Link / AITools / RPA
-      \   /
-       \ /
-Infrastructure: MySQL / PostgreSQL / Redis / MinIO
+
+### 工作流执行流程
+
+```mermaid
+sequenceDiagram
+    actor U as User
+    participant FE as Console Frontend
+    participant Hub as Console Hub
+    participant Engine as Workflow Engine
+    participant LLM as LLM API (DeepSeek/OpenAI)
+    participant Tool as Plugin Tools
+
+    U->>FE: Drag & drop nodes, connect edges
+    FE->>Hub: POST /workflow/debug (WorkflowDSL)
+    Hub->>Engine: Submit workflow for execution
+    Engine->>Engine: Parse WorkflowDSL, build DAG
+    loop Each node in topological order
+        Engine->>Engine: Execute NodeExecutor
+        alt LLM Node
+            Engine->>LLM: Chat completion (stream)
+            LLM-->>Engine: SSE chunks
+        else Tool Node
+            Engine->>Tool: Execute tool (HTTP/gRPC)
+            Tool-->>Engine: Tool result
+        end
+        Engine-->>Hub: SseEmitter.send(node status + output)
+        Hub-->>FE: EventSource.onmessage (SSE)
+    end
+    Engine-->>Hub: Workflow complete
+    Hub-->>FE: Final SSE event
+```
+
+### 多模型统一网关
+
+```mermaid
+sequenceDiagram
+    participant Caller as WorkflowChatService
+    participant Gateway as LlmApiClient
+    participant Provider as Model Provider
+
+    Caller->>Gateway: chatCompletion(model, messages)
+    Gateway->>Gateway: Resolve provider by model name
+    alt DeepSeek
+        Gateway->>Provider: POST /chat/completions<br/>Authorization: Bearer sk-***
+        Provider-->>Gateway: SSE data chunks
+    else OpenAI Compatible
+        Gateway->>Provider: POST /v1/chat/completions<br/>Authorization: Bearer sk-***
+        Provider-->>Gateway: SSE data chunks
+    end
+    Gateway-->>Caller: Flux<String> (reactive stream)
 ```
 
 ## 快速开始
