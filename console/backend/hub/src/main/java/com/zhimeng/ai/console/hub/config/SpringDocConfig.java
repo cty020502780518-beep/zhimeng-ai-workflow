@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 @Configuration
-@OpenAPIDefinition(info = @Info(title = "Zhimeng AI Workflow Console Server", version = "1.0", description = "Zhimeng AI Workflow Console Server API Document"))
+@OpenAPIDefinition(info = @Info(title = "zhimeng-ai Workflow Console Server", version = "1.0", description = "zhimeng-ai Workflow Console Server API Document"))
 public class SpringDocConfig {
 
     @Bean

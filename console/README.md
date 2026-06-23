@@ -167,4 +167,4 @@ npm run dev
 - **Frontend Configuration**: Environment-specific files in `frontend/`
 - **Docker Configuration**: Docker setup in `backend/docker/`
 
-This console module serves as the central interface for the Zhimeng AI workflow platform, providing tools for agent creation, workflow management, and interaction. See the root `NOTICE.md` for attribution and secondary-development boundaries.
+This console module serves as the central interface for the zhimeng-ai workflow platform, providing tools for agent creation, workflow management, and interaction. See the root `NOTICE.md` for attribution and secondary-development boundaries.

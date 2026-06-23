@@ -133,7 +133,7 @@ export interface TtsSignResponse {
 }
 
 const DEFAULT_TEXT =
-  '智梦AI语音合成基于先进的深度学习技术，提供自然流畅的语音合成效果。您可以在这里输入任意文本进行语音合成体验。';
+  'zhimeng-ai 语音合成基于先进的深度学习技术，提供自然流畅的语音合成效果。您可以在这里输入任意文本进行语音合成体验。';
 
 const NOT_SUPPORT_TIP = '当前浏览器不支持该功能，请换个浏览器试试';
 

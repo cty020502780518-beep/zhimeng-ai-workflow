@@ -39,8 +39,8 @@ const LoginPage = () => {
       <div className="login-container">
         <div className="login-header">
           <div className="login-brand">
-            <img src="/zhimeng-ai-icon.svg" alt="ZhimengAI logo" className="login-brand-logo" />
-            <h1>ZhimengAI</h1>
+            <img src="/zhimeng-ai-icon.svg" alt="zhimeng-ai logo" className="login-brand-logo" />
+            <h1>zhimeng-ai</h1>
           </div>
           <p>本地开发登录</p>
         </div>

@@ -51,7 +51,7 @@ const PublishResultModal = ({
   const renderPlatformLogo = (type: number): React.ReactElement | null => {
     switch (type) {
       case 1:
-        return <img src={icons.zhimeng} alt="智梦AI" className="w-12 h-12" />;
+        return <img src={icons.zhimeng} alt="zhimeng-ai" className="w-12 h-12" />;
       case 2:
         return (
           <img src={icons.zhimengCloud} alt="AI云" className="w-12 h-12" />

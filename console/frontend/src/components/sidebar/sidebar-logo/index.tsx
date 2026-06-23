@@ -16,13 +16,13 @@ const SidebarLogo = (): ReactElement => {
       <img
         src="/zhimeng-ai-icon.svg"
         className="h-10 w-10 flex-shrink-0"
-        alt="ZhimengAI"
+        alt="zhimeng-ai"
       />
       <span
         className="text-[30px] font-semibold leading-none"
         style={{ color: '#334155' }}
       >
-        ZhimengAI
+        zhimeng-ai
       </span>
     </div>
   );

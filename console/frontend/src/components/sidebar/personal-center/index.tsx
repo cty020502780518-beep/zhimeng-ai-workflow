@@ -119,7 +119,7 @@ const RecentUsedList: FC<{
             <div className={styles.itemInfo}>
               <img className={styles.actImg} src={act} alt="" />
               <div className={styles.actText}>
-                {item.creatorName || '@智梦AI'}
+                {item.creatorName || '@zhimeng-ai'}
               </div>
               <img className={styles.fireImg} src={fire} alt="" />
               <div className={styles.fireText}>{item.hotNum || 0}</div>
@@ -181,7 +181,7 @@ const FavoritesList: FC<{
             <div className={styles.itemInfo}>
               <img className={styles.actImg} src={act} alt="" />
               <div className={styles.actText}>
-                {item.bot.creatorName || '@智梦AI'}
+                {item.bot.creatorName || '@zhimeng-ai'}
               </div>
               <img className={styles.fireImg} src={fire} alt="" />
               <div className={styles.fireText}>{item.bot.hotNum || 0}</div>
