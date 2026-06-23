@@ -20,12 +20,12 @@ MYSQL_USER="root"
 
 # 如果环境变量未设置，则尝试交互式获取
 if [ -z "$MYSQL_PASSWORD" ]; then
-    echo -e "${YELLOW}请输入 MySQL root 用户密码 (直接回车使用默认值: 123456):${NC}"
+    echo -e "${YELLOW}请输入 MySQL root 用户密码:${NC}"
     read -s MYSQL_PASSWORD
     echo ""
     
     if [ -z "$MYSQL_PASSWORD" ]; then
-        MYSQL_PASSWORD="123456"
+        MYSQL_PASSWORD=""
     fi
 fi
 
@@ -99,7 +99,7 @@ else
     echo -e "${RED}✗ MySQL 连接失败${NC}"
     echo -e "${YELLOW}请检查:${NC}"
     echo -e "  1. MySQL 服务是否启动: ${CYAN}brew services list | grep mysql${NC}"
-    echo -e "  2. 用户名密码是否正确: ${CYAN}root / 123456${NC}"
+    echo -e "  2. 用户名密码是否为正确的 MySQL 凭证"
     echo -e "  3. 启动 MySQL: ${CYAN}brew services start mysql${NC}"
     exit 1
 fi
@@ -270,7 +270,7 @@ echo -e "${CYAN}数据库连接信息:${NC}"
 echo -e "  Host: ${YELLOW}localhost${NC}"
 echo -e "  Port: ${YELLOW}3306${NC}"
 echo -e "  User: ${YELLOW}root${NC}"
-echo -e "  Password: ${YELLOW}123456${NC}"
+echo -e "  Password: ${YELLOW}(from MYSQL_PASSWORD env var)${NC}"
 echo ""
 
 echo -e "${CYAN}已创建的数据库:${NC}"

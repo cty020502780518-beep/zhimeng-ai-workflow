@@ -17,7 +17,7 @@ NC='\033[0m'
 POSTGRES_HOST="localhost"
 POSTGRES_PORT="5432"
 POSTGRES_USER="postgres"
-POSTGRES_PASSWORD="123456"
+POSTGRES_PASSWORD="${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD first}"
 POSTGRES_DB="workflow_java"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -48,11 +48,11 @@ else
     echo -e "${RED}✗ PostgreSQL 连接失败${NC}"
     echo -e "${YELLOW}请检查:${NC}"
     echo -e "  1. PostgreSQL 服务是否启动: ${CYAN}brew services list | grep postgresql${NC}"
-    echo -e "  2. 用户名密码是否正确: ${CYAN}postgres / 123456${NC}"
+    echo -e "  2. 用户名密码是否为正确的 PostgreSQL 凭证"
     echo -e "  3. 启动 PostgreSQL: ${CYAN}brew services start postgresql@14${NC}"
     echo -e "  4. 如果密码不对，重置密码:"
     echo -e "     ${CYAN}psql -U postgres -d postgres${NC}"
-    echo -e "     ${CYAN}ALTER USER postgres WITH PASSWORD '123456';${NC}"
+    echo -e "     ${CYAN}ALTER USER postgres WITH PASSWORD 'your_password';${NC}"
     exit 1
 fi
 echo ""
@@ -94,7 +94,7 @@ echo -e "  Host: ${YELLOW}localhost${NC}"
 echo -e "  Port: ${YELLOW}5432${NC}"
 echo -e "  Database: ${YELLOW}workflow_java${NC}"
 echo -e "  User: ${YELLOW}postgres${NC}"
-echo -e "  Password: ${YELLOW}123456${NC}"
+echo -e "  Password: ${YELLOW}(from POSTGRES_PASSWORD env var)${NC}"
 echo ""
 
 echo -e "${CYAN}JDBC URL:${NC}"

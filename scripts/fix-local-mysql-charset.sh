@@ -12,12 +12,12 @@ MYSQL_PORT="3306"
 MYSQL_USER="root"
 
 if [ -z "$MYSQL_PASSWORD" ]; then
-    echo -e "${YELLOW}请输入 MySQL root 用户密码 (直接回车使用默认值: 123456):${NC}"
+    echo -e "${YELLOW}请输入 MySQL root 用户密码:${NC}"
     read -s MYSQL_PASSWORD
     echo ""
 
     if [ -z "$MYSQL_PASSWORD" ]; then
-        MYSQL_PASSWORD="123456"
+        MYSQL_PASSWORD=""
     fi
 fi
 
