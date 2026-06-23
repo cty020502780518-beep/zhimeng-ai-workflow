@@ -15,8 +15,8 @@
     <artifactId>core-workflow-java</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>ZhimengAI Workflow Engine - Java Implementation</name>
-    <description>Java implementation of Workflow Engine</description>
+    <name>zhimeng-ai-core-workflow</name>
+    <description>Core workflow engine with DAG scheduling and node execution</description>
 
     <properties>
         <java.version>21</java.version>

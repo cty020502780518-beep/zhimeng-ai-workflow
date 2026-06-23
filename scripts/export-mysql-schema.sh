@@ -7,7 +7,7 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-SQL_DIR="$PROJECT_ROOT/docker/ZhimengAI/mysql"
+SQL_DIR="$PROJECT_ROOT/docker/zhimeng-ai/mysql"
 
 # MySQL 连接信息
 MYSQL_HOST="localhost"

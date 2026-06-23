@@ -10,7 +10,7 @@
     </parent>
     <artifactId>commons</artifactId>
     <name>zhimeng-ai-console-commons</name>
-    <description>ZhimengAI Console Commons</description>
+    <description>zhimeng-ai Console Commons</description>
 
     <dependencies>
 

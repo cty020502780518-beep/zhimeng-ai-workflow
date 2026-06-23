@@ -10,7 +10,7 @@
     </parent>
     <artifactId>toolkit</artifactId>
     <name>zhimeng-ai-console-toolkit</name>
-    <description>ZhimengAI Console Toolkit</description>
+    <description>zhimeng-ai Console Toolkit</description>
 
     <dependencies>
         <!-- Internal sub-module dependency -->

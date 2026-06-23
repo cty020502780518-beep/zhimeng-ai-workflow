@@ -1,4 +1,4 @@
-# 智梦AI 工作流平台 (ZhimengAI Workflow)
+# zhimeng-ai-workflow — 企业级 AI Agent 可视化工作流编排平台
 
 企业级 AI Agent 可视化工作流编排平台，支持拖拽式编排 LLM 节点、工具节点与逻辑控制流，提供从工作流设计、调试到发布的完整生命周期管理。
 

@@ -10,7 +10,7 @@
     </parent>
     <artifactId>hub</artifactId>
     <name>zhimeng-ai-console-hub</name>
-    <description>ZhimengAI Console Hub Api Server</description>
+    <description>zhimeng-ai Console Hub API Server</description>
 
     <dependencies>
         <dependency>
