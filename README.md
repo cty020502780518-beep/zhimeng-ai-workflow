@@ -1,12 +1,6 @@
 # zhimeng-ai-workflow — 企业级 AI Agent 可视化工作流编排平台
 
-企业级 AI Agent 可视化工作流编排平台，支持拖拽式编排 LLM 节点、工具节点与逻辑控制流，提供从工作流设计、调试到发布的完整生命周期管理。
-
-## 项目说明
-
-本仓库为学习实践、二次开发与面试复盘用途的源码展示版本，已移除真实密钥并对公开仓库中的说明文档做了命名与技术表述校准。仓库不声明所有代码均为从零自研；Console、后台管理、工程脚手架与部分通用工具代码可能来源于开源项目或工程模板的学习与改造，原始作者信息与许可证声明应继续保留，详见 `NOTICE.md`。
-
-代码阅读重点是可视化工作流编排、Java 工作流执行引擎、SSE 流式回调、多模型调用封装、插件节点执行与 Docker Compose 本地部署。个人复盘/答辩时建议只围绕自己能够解释清楚的核心链路展开，不把模板代码、通用后台能力或第三方基础设施描述为完全原创实现。
+支持拖拽式编排 LLM 节点、工具节点与逻辑控制流，提供从工作流设计、调试到发布的完整生命周期管理的 Multi-Agent 工作流编排系统。
 
 ## 技术栈
 
@@ -17,8 +11,8 @@
 | 前端 | React 18 / TypeScript 5.9 / Vite 5.4 / Ant Design 5 / ReactFlow |
 | 数据库 | MySQL 8.4 / PostgreSQL / Redis 7 |
 | 对象存储 | MinIO |
-| 容器化 | Docker Compose |
 | 持久层 | MyBatis-Plus 3.5 |
+| 部署 | Docker Compose |
 
 ## 系统架构
 
@@ -35,7 +29,7 @@ Port 7880                      Link / AITools / RPA
 Infrastructure: MySQL / PostgreSQL / Redis / MinIO
 ```
 
-## 本地启动
+## 快速开始
 
 ### 前置条件
 
@@ -49,6 +43,13 @@ Infrastructure: MySQL / PostgreSQL / Redis / MinIO
 cd docker/zhimeng-ai
 cp .env.example .env
 docker compose up -d
+```
+
+启动后验证：
+
+```bash
+docker compose ps                            # 所有容器运行状态
+curl -s http://localhost:8080/actuator/health  # Console Hub 健康检查
 ```
 
 ### 2. 启动后端
@@ -108,6 +109,14 @@ npm run dev
 
 统一管理 MySQL、Redis、MinIO、Console Hub 及 Workflow Engine 等 5+ 核心服务的依赖关系与健康检查。
 
+## 运维与可观测性
+
+- `Dockerfile`：前后端多阶段构建，运行镜像内置健康检查。
+- `docker/zhimeng-ai/docker-compose.yaml`：基础设施与后端应用统一编排；MySQL、Redis、MinIO 均配置健康检查。
+- `/actuator/health`：应用健康状态。
+- `/actuator/health/liveness`：进程存活探针。
+- `/actuator/health/readiness`：依赖就绪探针，适合 Docker / K8s readiness check。
+
 ---
 
 ## 面试官源码阅读导航
@@ -146,6 +155,12 @@ npm run dev
 Java 1233 · TypeScript/React 548 · 总计约 1800 个源文件（本仓库主要包含 Console 前后端与 Java Workflow Engine；外部 Python/FastAPI 插件服务未纳入本次 GitHub 展示）
 
 ---
+
+## 项目范围说明
+
+本仓库为学习实践、二次开发与面试复盘用途的源码展示版本，已移除真实密钥并对公开仓库中的说明文档做了命名与技术表述校准。仓库不声明所有代码均为从零自研；Console、后台管理、工程脚手架与部分通用工具代码可能来源于开源项目或工程模板的学习与改造，原始作者信息与许可证声明应继续保留，详见 `NOTICE.md`。
+
+代码阅读重点是可视化工作流编排、Java 工作流执行引擎、SSE 流式回调、多模型调用封装、插件节点执行与 Docker Compose 本地部署。个人复盘/答辩时建议只围绕自己能够解释清楚的核心链路展开。
 
 ## License
 
