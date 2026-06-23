@@ -73,8 +73,8 @@ public class WorkflowController {
     private final TalkAgentService talkAgentService;
     private final WorkflowExportService workflowExportService;
 
-    @Value("${workflow.internal-clone.password:change-me}")
-    private String internalClonePassword = "change-me";
+    @Value("${workflow.internal-clone.password:}")
+    private String internalClonePassword;
 
     // ---------------------- Basic Information ----------------------
 
